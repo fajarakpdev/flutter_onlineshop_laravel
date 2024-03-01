@@ -1,4 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+
 
 class ProductResponseModel {
     final String? message;
@@ -146,6 +148,37 @@ class Product {
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
     };
+
+  @override
+  bool operator ==(covariant Product other) {
+    if (identical(this, other)) return true;
+  
+    return 
+      other.id == id &&
+      other.categoryId == categoryId &&
+      other.name == name &&
+      other.description == description &&
+      other.image == image &&
+      other.price == price &&
+      other.stock == stock &&
+      other.isAvailable == isAvailable &&
+      other.createdAt == createdAt &&
+      other.updatedAt == updatedAt;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+      categoryId.hashCode ^
+      name.hashCode ^
+      description.hashCode ^
+      image.hashCode ^
+      price.hashCode ^
+      stock.hashCode ^
+      isAvailable.hashCode ^
+      createdAt.hashCode ^
+      updatedAt.hashCode;
+  }
 }
 
 class Link {

@@ -5,6 +5,7 @@ import 'package:online_shop/data/datasources/category_remote_datasource.dart';
 import 'package:online_shop/data/datasources/product_remode_datasource.dart';
 import 'package:online_shop/presentation/home/bloc/all_product/all_product_bloc.dart';
 import 'package:online_shop/presentation/home/bloc/best_seller_product/best_seller_product_bloc.dart';
+import 'package:online_shop/presentation/home/bloc/checkout/checkout_bloc.dart';
 import 'package:online_shop/presentation/home/bloc/special_offer_product/special_offer_product_bloc.dart';
 
 import 'core/constants/colors.dart';
@@ -33,6 +34,8 @@ class MyApp extends StatelessWidget {
           create: (context) => BestSellerProductBloc(ProductRemoteDatasource()),
         ),BlocProvider(
           create: (context) => SpecialOfferProductBloc(ProductRemoteDatasource()),
+        ),BlocProvider(
+          create: (context) => CheckoutBloc(),
         ),
       ],
       child: MaterialApp.router(

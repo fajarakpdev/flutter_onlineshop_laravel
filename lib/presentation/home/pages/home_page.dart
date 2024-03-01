@@ -8,6 +8,7 @@ import '../../../core/components/spaces.dart';
 import '../../../core/router/app_router.dart';
 import '../bloc/all_product/all_product_bloc.dart';
 import '../bloc/best_seller_product/best_seller_product_bloc.dart';
+import '../bloc/checkout/checkout_bloc.dart';
 import '../bloc/special_offer_product/special_offer_product_bloc.dart';
 import '../models/product_model.dart';
 import '../models/store_model.dart';
@@ -15,6 +16,7 @@ import '../widgets/banner_slider.dart';
 import '../widgets/organism/menu_categories.dart';
 import '../widgets/organism/product_list.dart';
 import '../widgets/title_content.dart';
+import 'package:badges/badges.dart' as badges;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -240,18 +242,62 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Cwb Store'),
         actions: [
+          BlocBuilder<CheckoutBloc, CheckoutState>(
+            builder: (context, state) {
+              return state.maybeWhen(
+                  // return badges.Badge(
+                  //   badgeContent: Text(
+                  //     '1',
+                  //     style: TextStyle(color: Colors.white),
+                  //   ),
+                  //   child: IconButton(
+                  //     onPressed: () {
+                  //       context.goNamed(
+                  //         RouteConstants.cart,
+                  //         pathParameters: PathParameters().toMap(),
+                  //       );
+                  //     },
+                  //     icon: Assets.icons.cart.svg(height: 24.0),
+                  //   ),
+                  // );
+
+                  loaded: (checkout) {
+                    final totalQuantity = checkout.fold<int>(
+                        0,
+                        (previousValue, element) =>
+                            previousValue + element.quantity);
+                    return totalQuantity > 0
+                        ? badges.Badge(
+                            badgeContent: Text(
+                              totalQuantity.toString(),
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                            child: IconButton(
+                              onPressed: () {
+                                context.goNamed(
+                                  RouteConstants.cart,
+                                  pathParameters: PathParameters().toMap(),
+                                );
+                              },
+                              icon: Assets.icons.cart.svg(height: 24.0),
+                            ),
+                          )
+                        : IconButton(
+                            onPressed: () {
+                              context.goNamed(
+                                RouteConstants.cart,
+                                pathParameters: PathParameters().toMap(),
+                              );
+                            },
+                            icon: Assets.icons.cart.svg(height: 24.0),
+                          );
+                  },
+                  orElse: () => const SizedBox.shrink());
+            },
+          ),
           IconButton(
             onPressed: () {},
             icon: Assets.icons.notification.svg(height: 24.0),
-          ),
-          IconButton(
-            onPressed: () {
-              context.goNamed(
-                RouteConstants.cart,
-                pathParameters: PathParameters().toMap(),
-              );
-            },
-            icon: Assets.icons.cart.svg(height: 24.0),
           ),
         ],
       ),

@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:http/http.dart';
 import 'package:online_shop/data/datasources/product_remode_datasource.dart';
 import 'package:online_shop/data/models/responses/product_response_model.dart';
 
