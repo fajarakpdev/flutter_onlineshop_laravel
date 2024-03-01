@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:online_shop/data/models/responses/product_response_model.dart';
 
 
 import '../../../../core/components/spaces.dart';
-import '../../models/product_model.dart';
 import '../product_card.dart';
 import '../title_content.dart';
 
 class ProductList extends StatelessWidget {
   final String title;
   final VoidCallback onSeeAllTap;
-  final List<ProductModel> items;
+  final List<Product> items;
 
   const ProductList({
     super.key,

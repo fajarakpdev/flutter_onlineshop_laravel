@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:online_shop/data/models/responses/product_response_model.dart';
 
 
 import '../../../core/components/spaces.dart';
 import '../../../core/core.dart';
 import '../../../core/router/app_router.dart';
-import '../models/product_model.dart';
 
 class ProductCard extends StatelessWidget {
-  final ProductModel data;
+  final Product data;
   const ProductCard({super.key, required this.data});
 
   @override
@@ -41,8 +41,8 @@ class ProductCard extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(5.0),
-                  child: Image.asset(
-                    data.images.first,
+                  child: Image.network(
+                    data.image!,
                     width: 170.0,
                     height: 112.0,
                     fit: BoxFit.cover,
@@ -51,7 +51,7 @@ class ProductCard extends StatelessWidget {
                 const SpaceHeight(14.0),
                 Flexible(
                   child: Text(
-                    data.name,
+                    data.name!,
                     style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
@@ -59,7 +59,7 @@ class ProductCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  data.priceFormat,
+                  data.price!.currencyFormatRp,
                   style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
