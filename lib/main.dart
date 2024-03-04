@@ -30,11 +30,15 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => AllProductBloc(ProductRemoteDatasource()),
-        ),BlocProvider(
+        ),
+        BlocProvider(
           create: (context) => BestSellerProductBloc(ProductRemoteDatasource()),
-        ),BlocProvider(
-          create: (context) => SpecialOfferProductBloc(ProductRemoteDatasource()),
-        ),BlocProvider(
+        ),
+        BlocProvider(
+          create: (context) =>
+              SpecialOfferProductBloc(ProductRemoteDatasource()),
+        ),
+        BlocProvider(
           create: (context) => CheckoutBloc(),
         ),
       ],
@@ -66,6 +70,7 @@ class MyApp extends StatelessWidget {
         routerDelegate: router.routerDelegate,
         routeInformationParser: router.routeInformationParser,
         routeInformationProvider: router.routeInformationProvider,
+        debugShowCheckedModeBanner: false,
       ),
     );
   }
